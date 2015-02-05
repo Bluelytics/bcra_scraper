@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-import scrapy, datetime
-from datetime import datetime, timedelta
+import scrapy
+from datetime import datetime, date, timedelta
 
 from bcra.items import BcraItem
 
-#start_date = datetime.date(2010,1,1)
-#start_date = datetime.date(2015,1,21)
+start_date = date(2010,1,1)
+#start_date = date(2015,1,21)
 end_date = datetime.now().date()
-start_date = end_date - timedelta(days=30)
+#start_date = end_date - timedelta(days=30)
 
 def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):
-        yield start_date + datetime.timedelta(n)
+        yield start_date + timedelta(n)
 
-def getIntVal(value):
+def getFloatVal(value):
     try:
-        return int(value)
+        return float(value.replace(',','.'))
     except Exception:
         return None
 
@@ -30,27 +30,27 @@ class BcraSpiderSpider(scrapy.Spider):
 
         item = BcraItem()
         item['date'] = response.url.split('=')[1]
-        item['Reservas'] = getIntVal(values[0])
-        item['Asistencia'] = getIntVal(values[1])
-        item['BaseMonetaria'] = getIntVal(values[2])
-        item['Circulacion'] = getIntVal(values[3])
-        item['BilletesPublico'] = getIntVal(values[4])
-        item['EfectivoFinanciero'] = getIntVal(values[5])
-        item['DepositosBCRA'] = getIntVal(values[6])
-        item['LEBAC'] = getIntVal(values[7])
-        item['DepositosFinancieras'] = getIntVal(values[8])
-        item['CuentasCorrientes'] = getIntVal(values[9])
-        item['CajasAhorro'] = getIntVal(values[10])
-        item['APlazo'] = getIntVal(values[11])
-        item['CEDROS'] = getIntVal(values[12])
-        item['OtrosDepositos'] = getIntVal(values[13])
-        item['PrestamosAPrivados'] = getIntVal(values[14])
-        item['TasasInteresEntrePrivadas'] = getIntVal(values[15])
-        item['TasasInteres30Dias'] = getIntVal(values[16])
-        item['BADLAR'] = getIntVal(values[17])
-        item['TasasLebac'] = getIntVal(values[18])
-        item['CambioRef'] = getIntVal(values[19])
-        item['CER'] = getIntVal(values[20])
+        item['Reservas'] = getFloatVal(values[0])
+        item['Asistencia'] = getFloatVal(values[1])
+        item['BaseMonetaria'] = getFloatVal(values[2])
+        item['Circulacion'] = getFloatVal(values[3])
+        item['BilletesPublico'] = getFloatVal(values[4])
+        item['EfectivoFinanciero'] = getFloatVal(values[5])
+        item['DepositosBCRA'] = getFloatVal(values[6])
+        item['LEBAC'] = getFloatVal(values[7])
+        item['DepositosFinancieras'] = getFloatVal(values[8])
+        item['CuentasCorrientes'] = getFloatVal(values[9])
+        item['CajasAhorro'] = getFloatVal(values[10])
+        item['APlazo'] = getFloatVal(values[11])
+        item['CEDROS'] = getFloatVal(values[12])
+        item['OtrosDepositos'] = getFloatVal(values[13])
+        item['PrestamosAPrivados'] = getFloatVal(values[14])
+        item['TasasInteresEntrePrivadas'] = getFloatVal(values[15])
+        item['TasasInteres30Dias'] = getFloatVal(values[16])
+        item['BADLAR'] = getFloatVal(values[17])
+        item['TasasLebac'] = getFloatVal(values[18])
+        item['CambioRef'] = getFloatVal(values[19])
+        item['CER'] = getFloatVal(values[20])
 
         if item['Reservas'] != None:
             return item
