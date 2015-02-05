@@ -4,3 +4,4 @@ include
 lib
 /local
 .Rproj.user
+bcra/out
