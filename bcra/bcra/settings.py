@@ -15,3 +15,6 @@ NEWSPIDER_MODULE = 'bcra.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'bcra (+http://www.yourdomain.com)'
+
+AUTOTHROTTLE_ENABLED=True
+CONCURRENT_REQUESTS_PER_DOMAIN=1
