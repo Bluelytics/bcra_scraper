@@ -2,7 +2,7 @@ library(RJSONIO)
 library(forecast)
 library(lubridate)
 
-data <- fromJSON('initial.json')
+data <- fromJSON('out/bcra.json')
 
 parseCol <- function(col){
   
@@ -10,8 +10,10 @@ parseCol <- function(col){
     return (c(val$date, val[col]))
   }
   filtered <- lapply(data, filterCol)
-  DF <- do.call(rbind.data.frame, filtered)
+  DF <- as.data.frame(do.call(rbind, filtered))
   colnames(DF) <- c('date', 'x')
+  DF$date <- unlist(DF$date)
+  DF$x <- unlist(as.numeric(as.character(DF$x)))
   DF$date <- as.Date(DF$date, format="%d/%m/%Y")
   return (DF)
   

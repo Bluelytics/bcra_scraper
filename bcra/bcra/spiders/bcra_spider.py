@@ -4,10 +4,9 @@ from datetime import datetime, date, timedelta
 
 from bcra.items import BcraItem
 
-start_date = date(2010,1,1)
-#start_date = date(2015,1,21)
 end_date = datetime.now().date()
-#start_date = end_date - timedelta(days=30)
+start_date = end_date - timedelta(days=30)
+#start_date = date(2010,1,1)
 
 def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):

@@ -7,5 +7,7 @@ cd $DIR/bcra
 mkdir out
 rm out/*.json
 
-scrapy crawl bcra_spider -o out/bcra.json -t json
-
+scrapy crawl bcra_spider -o ../out/bcra.json -t json
+cd ..
+Rscript analyze.R
+../bluelytics/update_bcra.sh
