@@ -55,4 +55,4 @@ class BcraSpiderSpider(scrapy.Spider):
         if item['Reservas'] != None:
             return item
         else:
-            return None
+            raise Exception("No data on date " + item['date'])
