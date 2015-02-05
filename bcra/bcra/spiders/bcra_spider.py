@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import scrapy, datetime
-
+from datetime import datetime, timedelta
 
 from bcra.items import BcraItem
 
-start_date = datetime.date(2010,1,1)
+#start_date = datetime.date(2010,1,1)
 #start_date = datetime.date(2015,1,21)
-end_date = datetime.datetime.now().date()
+end_date = datetime.now().date()
+start_date = end_date - timedelta(days=30)
 
 def daterange(start_date, end_date):
     for n in range(int ((end_date - start_date).days)):
