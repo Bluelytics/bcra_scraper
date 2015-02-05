@@ -4,8 +4,6 @@ library(lubridate)
 
 data <- fromJSON('initial.json')
 
-head(data)
-
 parseCol <- function(col){
   
   filterCol <- function(val){
@@ -20,12 +18,13 @@ parseCol <- function(col){
 }
 
 convertTs <- function(serie){  
+  serie <- subset(serie, x>0)
   days <- data.frame ( date = as.Date(seq.POSIXt(ymd(min(serie$date)), ymd(max(serie$date)), by = "1 day")))
+  
   
   final <- na.locf(merge(days, serie, by="date", all.x=TRUE))
   final$x <- as.numeric(final$x)
   
-  final <- subset(final, x>0)
   
   finaldate = min(ymd(final$date))
   
@@ -38,7 +37,12 @@ procesar <- function(name){
   bts <- convertTs(columna)
   plot(bts, ylab=name, main=name)
   
-  return(bts)
+  days <- seq(min(columna$date), by='day', length.out=length(bts))
+  
+  resultado <- data.frame(date=days, x=bts)
+  
+  write.csv(resultado, paste('out/', name, '.csv', sep=""))
+  
 }
 
 procesar('Reservas')
@@ -53,12 +57,10 @@ procesar('DepositosFinancieras')
 procesar('CuentasCorrientes')
 procesar('CajasAhorro')
 procesar('APlazo')
-procesar('CEDROS')
 procesar('OtrosDepositos')
 procesar('PrestamosAPrivados')
 procesar('TasasInteresEntrePrivadas')
 procesar('TasasInteres30Dias')
 procesar('BADLAR')
-procesar('TasasLebac')
 procesar('CambioRef')
 procesar('CER')
