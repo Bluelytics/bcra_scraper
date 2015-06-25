@@ -5,7 +5,7 @@ from datetime import datetime, date, timedelta
 from bcra.items import BcraItem
 
 end_date = datetime.now().date()
-start_date = end_date - timedelta(days=30)
+start_date = end_date - timedelta(days=40)
 #start_date = date(2010,1,1)
 
 def daterange(start_date, end_date):
@@ -22,10 +22,10 @@ class BcraSpiderSpider(scrapy.Spider):
     name = "bcra_spider"
     allowed_domains = ["bcra.gov.ar"]
     start_urls = [
-        'http://www.bcra.gov.ar/estadis/es010000.asp?FechaCons=%s' % x.strftime("%d/%m/%Y") for x in daterange(start_date, end_date)]
+        'http://www.bcra.gov.ar/Estadisticas/estprv010000.asp?FechaCons=%s' % x.strftime("%d/%m/%Y") for x in daterange(start_date, end_date)]
 
     def parse(self, response):
-        values = response.xpath('//td[@class="Celda_Borde_Centro"]/text()').extract()
+        values = response.xpath('//table[@class="CSSTableGenerator"]/tr/td[@bgcolor="#EBEBEB"]/text()').extract()
 
         item = BcraItem()
         item['date'] = response.url.split('=')[1]
