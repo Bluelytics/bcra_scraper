@@ -32,7 +32,7 @@ class BcraSpiderSpider(scrapy.Spider):
         item['date'] = response.url.split('=')[1]
         item['CEDROS'] = 0
         item['Asistencia'] = 0
-        item['UVA'] = getFloatVal(values[0])
+        #item['UVA'] = getFloatVal(values[0])
         item['Reservas'] = getFloatVal(values[1])
         item['BaseMonetaria'] = getFloatVal(values[2])
         item['Circulacion'] = getFloatVal(values[3])
@@ -40,15 +40,15 @@ class BcraSpiderSpider(scrapy.Spider):
         item['EfectivoFinanciero'] = getFloatVal(values[5])
         item['DepositosBCRA'] = getFloatVal(values[6])
         item['LEBAC'] = getFloatVal(values[7])
-        item['LEBACNominal'] = getFloatVal(values[8])
+        #item['LEBACNominal'] = getFloatVal(values[8])
         item['DepositosFinancieras'] = getFloatVal(values[9])
         item['CuentasCorrientes'] = getFloatVal(values[10])
         item['CajasAhorro'] = getFloatVal(values[11])
         item['APlazo'] = getFloatVal(values[12])
         item['OtrosDepositos'] = getFloatVal(values[13])
         item['TasasLebac'] = getFloatVal(values[14])
-        item['TasasInteresPaseActivas'] = getFloatVal(values[15])
-        item['TasasInteresPasePasivas'] = getFloatVal(values[16])
+        #item['TasasInteresPaseActivas'] = getFloatVal(values[15])
+        #item['TasasInteresPasePasivas'] = getFloatVal(values[16])
         item['PrestamosAPrivados'] = getFloatVal(values[17])
         item['TasasInteresEntrePrivadas'] = getFloatVal(values[18])
         item['TasasInteres30Dias'] = getFloatVal(values[19])
